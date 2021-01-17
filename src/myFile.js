@@ -25,7 +25,8 @@ function displayFile(geojson) {
   map.addLayer(vector);
 
 
-  map.getView().setCenter(vector.getSource().getFeatures()[0].getGeometry().getCoordinates()[0]);
+  const firstCoordinate = vector.getSource().getFeatures()[0].getGeometry().getCoordinates()[0][0];
+  map.getView().setCenter(firstCoordinate);
 }
 
 function download() {
