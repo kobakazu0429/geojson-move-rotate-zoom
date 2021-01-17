@@ -78,10 +78,10 @@ h2 {
 .block,
 .box {
   display: table;
-  margin: 0.5em;
   position: relative;
   z-index: 1;
   margin: 1em;
+  width: 20vw;
 }
 .box {
   background: #def;
@@ -147,4 +147,9 @@ i.icss-book:after {
 
 .ol-attribution ul {
   font-size: 0.8em;
+}
+
+#map {
+  width: 70vw;
+  height: 90vh;
 }
