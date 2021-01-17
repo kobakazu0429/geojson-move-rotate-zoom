@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+  Copyright (c) 2016-2018 Jean-Marc VIGLINO,
+  released under CeCILL-B (french BSD like) licence: http://www.cecill.info/
+-->
+    <title>ol-ext: Transform interaction</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="description" content="transform interaction for OL3" />
+    <meta
+      name="keywords"
+      content="ol, openlayers, vector, transform, rotate, scale, stretch"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- jQuery -->
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.11.0.min.js"
+    ></script>
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- Openlayers -->
+    <link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" />
+    <script
+      type="text/javascript"
+      src="https://openlayers.org/en/latest/build/ol.js"
+    ></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
+
+    <!-- ol-ext -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
+      integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>features: scale, translate, rotate</h1>
+
+    <!-- Map div -->
+    <div id="map" style="width: 800px; height: 1000px"></div>
+
+    <div class="box">
+      <h2>Options:</h2>
+      <ul>
+        <li>
+          <input
+            id="scale"
+            type="checkbox"
+            onchange="setPropertie(this.id);"
+            checked="checked"
+          /><label for="scale"> enable scale</label>
+        </li>
+        <li>
+          <input
+            id="stretch"
+            type="checkbox"
+            onchange="setPropertie(this.id);"
+          /><label for="stretch"> enable stretch</label>
+        </li>
+        <li>
+          <input
+            id="rotate"
+            type="checkbox"
+            onchange="setPropertie(this.id);"
+            checked="checked"
+          /><label for="rotate"> enable rotate</label>
+        </li>
+        <li>
+          <input
+            id="keepAspectRatio"
+            type="checkbox"
+            onchange="setAspectRatio(this.id);"
+            checked="checked"
+          /><label for="keepAspectRatio"> force keepAspectRatio</label>
+        </li>
+        <li>
+          <input
+            id="enableRotatedTransform"
+            type="checkbox"
+            onchange="setPropertie(this.id);"
+          /><label for="enableRotatedTransform">
+            force matching the map rotation</label
+          >
+        </li>
+        <li>
+          SetRotateCenter:
+          <button onclick="firstPoint=false; interaction.setCenter()">
+            objects
+          </button>
+          <button
+            onclick="firstPoint=false; interaction.setCenter(map.getView().getCenter())"
+          >
+            view center
+          </button>
+          <button onclick="firstPoint=true;">first point</button>
+        </li>
+        <li>
+          <hr />
+          Use <i>Shift</i> to add object to tranform
+          <hr />
+          Use <i>Shift</i> key to preserve proportions when scaling (see
+          keepAspectRatio).
+          <br />
+          Use <i>Ctrl</i> key to modify the center when scaling.
+        </li>
+      </ul>
+      <div style="background: white; padding: 0 0.45em">
+        <span id="info"></span>&nbsp;
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Demo, Import/Export:</h2>
+      <ul>
+        <li>
+          <button onclick="displayDemoLayer()">demo</button>
+        </li>
+        <li>
+          <input type="file" name="myFile" id="myFile" />
+        </li>
+        <li><button onclick="download()">download edited file</button></li>
+        <li>
+          <button onclick="clearAllLayer()">clear</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h2>Tools:</h2>
+      <ul>
+        <li><button onclick="allSelected()">all selected</button></li>
+      </ul>
+    </div>
+
+    <script src="./src/index.js"></script>
+    <script src="./src/demo.js"></script>
+    <script src="./src/myFile.js"></script>
+  </body>
+</html>
