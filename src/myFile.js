@@ -1,3 +1,5 @@
+
+
 $('#myFile').change(function () {
   Array.from(this.files).map(file => {
     const permit_ext = ".geojson";
@@ -8,19 +10,20 @@ $('#myFile').change(function () {
     }
 
     const reader = new FileReader()
-    reader.onload = function () {
-      displayFile(JSON.parse(reader.result))
+    reader.onload = function (e) {
+      const filename = file.name.split(permit_ext)[0];
+      displayFile(filename, JSON.parse(reader.result))
     }
 
     reader.readAsText(file);
-  })
+  });
 });
 
 const vectorLayers = [];
 
-function displayFile(geojson) {
+function displayFile(name, geojson) {
   const vectorLayer = new ol.layer.Vector({
-    name: "myFile",
+    name: name,
     source: new ol.source.Vector({
       features: new ol.format.GeoJSON({ featureProjection: "EPSG:3857" }).readFeatures(geojson),
     }),
@@ -39,7 +42,7 @@ function download() {
       const features = layer.getSource().getFeatures();
       const json = new ol.format.GeoJSON().writeFeatures(features, { featureProjection: "EPSG:3857" });
       const blob = new Blob([json], { type: "application/json" });
-      saveAs(blob, `${layerName}-edited.geojson`);
+      saveAs(blob, `edited-${layerName}.geojson`);
     }
   });
 }
