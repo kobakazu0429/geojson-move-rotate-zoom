@@ -133,10 +133,9 @@ function clearAllLayer() {
 }
 
 function allSelected() {
-  map.getLayers().forEach(layer => {
-    if (layer.get('name') !== BASE_LAYER_NAME) {
-      const features = layer.getSource().getFeatures();
-      interaction.setSelection(features)
-    }
-  });
+  const layersFeatures = [...map.getLayers().getArray()]
+    .filter(layer => layer.get('name') !== BASE_LAYER_NAME)
+    .map(layer => layer.getSource().getFeatures());
+
+  interaction.setSelection(layersFeatures.flat())
 }
