@@ -1,0 +1,24 @@
+{
+  "name": "geojson-move-rotate-zoom",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.5",
+    "@types/jquery": "^3.5.16",
+    "@types/ol-ext": "npm:@siedlerchr/types-ol-ext",
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "jquery": "^3.6.4",
+    "ol": "^7.3.0",
+    "ol-ext": "^4.0.6"
+  }
+}
